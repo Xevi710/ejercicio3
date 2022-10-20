@@ -5,8 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 3</title>
+    <script>
+
+        function validar() {
+            var num = parseInt(document.getElementById("num").value);
+            var body = document.getElementById("body")[0];
+            var span = document.getElementById("span")[0]
+            
+            if(!Number.isInteger(num)){
+                span.createTextNode("Hay que poner números");
+                location.reload();
+            } else{
+                if (num >= 0 && num <= 9) {
+                    setTimeout(multiplicar(num),3000);
+                } else {
+                    alert("Hay que poner un número entre 0 y 9");
+                    location.reload();
+                }
+            } 
+        }
+
+        function multiplicar(num){
+            var multiplicado;
+            var tabla = document.createElement("table");
+            var tblBody = document.createElement("tbody");
+
+            for(i=0; i<=10;i++){
+
+                multiplicado = num*i;
+
+                var hilera = document.createElement("tr");
+                var celda = document.createElement("td");
+                var textoCelda = document.createTextNode(num+" * "+i+" = "+multiplicado);
+                celda.appendChild(textoCelda);
+                hilera.appendChild(celda);
+                tblBody.appendChild(hilera);
+            }
+
+            tabla.appendChild(tblBody);
+            body.appendChild(tabla);
+            tabla.setAttribute("border", "2");
+
+        }
+    </script>
 </head>
-<body>
-    
+<body id="body">
+    <form>
+        <label for="num">Escriba el número a multiplicar: </label>
+        <input type="text" id="num"><span id="span"></span>
+        <input type="button" value="Multiplicar" id="button" onclick="validar()">
+    </form>
 </body>
 </html>
